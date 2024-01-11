@@ -133,7 +133,7 @@ In order to make the html file, you need to "Knit" the file. Knitting just means
 
 ```{r}
 #install.packages("tidyverse")
-library("tidyverse")
+library("tidyverse") 
 ```
 
 ```{r}
