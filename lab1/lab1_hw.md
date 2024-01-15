@@ -54,6 +54,13 @@ No
 ```
 
 
+```r
+(8 / 2 * 2 )*2
+```
+
+```
+## [1] 16
+```
 
 **6. `Objects` in R are a way in which we can store data or operations. We will talk more about objects next week. For now, make a new object `pi` as 3.14159265359 by running the following code chunk. You should now see the object `pi` in the environment window in the top right.**  
 
