@@ -6,7 +6,7 @@ Hi👋, this is Zhuoya Wang.
 🌱I'm a 4th year student majoring in statistics📊
 
 ## Contact Info
-📧 [Zhuoya Wang](oyawang@ucdavis.edu)
+[Zhuoya Wang](mailto:oyawang@ucdavis.edu).
 
 ### Fun Fact
 MBTI -- ISTJ   
