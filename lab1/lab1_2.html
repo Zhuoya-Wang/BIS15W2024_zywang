@@ -1545,13 +1545,13 @@ are because they are not in the correct working directory.</p>
 <p>Run the following code by clicking the small green arrow to check
 your current working directory.</p>
 <pre class="r"><code>getwd()</code></pre>
-<pre><code>## [1] &quot;/Users/wzy0329/Desktop/BIS15W2024_zywang/lab1&quot;</code></pre>
+<pre><code>## [1] &quot;/Users/jmledfor/Desktop/BIS15W2024_jledford/lab1&quot;</code></pre>
 <p>If you are not in the <strong>lab 1 folder</strong>, please navigate
 to it: Session&gt;Set Working Directory&gt;Choose
 Directory&gt;Desktop&gt;lab1.</p>
 <p>Re-run the code below to confirm.</p>
 <pre class="r"><code>getwd()</code></pre>
-<pre><code>## [1] &quot;/Users/wzy0329/Desktop/BIS15W2024_zywang/lab1&quot;</code></pre>
+<pre><code>## [1] &quot;/Users/jmledfor/Desktop/BIS15W2024_jledford/lab1&quot;</code></pre>
 </div>
 <div id="r" class="section level2">
 <h2>R</h2>
@@ -1579,31 +1579,30 @@ sign.</p>
 <pre><code>## [1] 3</code></pre>
 <p>What is going on here? How do we adjust this expression so the output
 is 12?</p>
-<pre class="r"><code>(4-2)*6 # add ()</code></pre>
+<pre class="r"><code>(4-2)*6</code></pre>
 <pre><code>## [1] 12</code></pre>
 <p>Statistics are what R was originally written for and there are
 thousands of packages for specialized statistics depending on your
 needs.</p>
 <p>First, we need to make a vector or string of values which we will
 store as an object x. More on this later…</p>
-<pre class="r"><code>x &lt;- c(4, 6, 8, 5, 6, 7, 7, 7) 
-y &lt;- c(128, 224, 78, 32, 69, 88,93, 97)</code></pre>
+<pre class="r"><code>x &lt;- c(4, 6, 8, 5, 6, 7, 7, 7)</code></pre>
+<pre class="r"><code>y &lt;- c(4, 4, 3, 5, 6, 4, 4, 4)</code></pre>
+<pre class="r"><code>mean(y)</code></pre>
+<pre><code>## [1] 4.25</code></pre>
+<pre class="r"><code>x+y</code></pre>
+<pre><code>## [1]  8 10 11 10 12 11 11 11</code></pre>
 <p>Now we can calculate the mean of object x.</p>
 <pre class="r"><code>mean(x)</code></pre>
 <pre><code>## [1] 6.25</code></pre>
-<pre class="r"><code>mean(y)</code></pre>
-<pre><code>## [1] 101.125</code></pre>
 <p>We can do the same thing for median.</p>
 <pre class="r"><code>median(x)</code></pre>
 <pre><code>## [1] 6.5</code></pre>
-<pre class="r"><code>median(y)</code></pre>
-<pre><code>## [1] 90.5</code></pre>
 <pre class="r"><code>sd(x)</code></pre>
 <pre><code>## [1] 1.28174</code></pre>
-<pre class="r"><code>sd(y)</code></pre>
-<pre><code>## [1] 56.5949</code></pre>
-<pre class="r"><code>z &lt;- 1
-rm(z) ## remove z</code></pre>
+<pre class="r"><code>z &lt;- 1</code></pre>
+<pre class="r"><code>x &lt;- 1</code></pre>
+<pre class="r"><code>rm(x)</code></pre>
 </div>
 <div id="rmarkdown" class="section level2">
 <h2>RMarkdown</h2>
