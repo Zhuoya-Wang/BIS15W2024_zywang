@@ -419,29 +419,92 @@ used to determine this below.</li>
 <pre><code>## [1] 83</code></pre>
 <pre class="r"><code>ncol(sleep)</code></pre>
 <pre><code>## [1] 11</code></pre>
-<p>We can get the dimensions by using the dim() function, or get the
-number of observation by nrow(),and the number of variables by
-ncol()</p>
+<p>The dimension of this data frame is 83 x 11. We can get the
+dimensions by using the dim() function, or get the number of observation
+by nrow(),and the number of variables by ncol()</p>
 <ol start="4" style="list-style-type: decimal">
 <li>Are there any NAs in the data? How did you determine this? Please
 show your code.</li>
 </ol>
 <pre class="r"><code>sum(is.na(sleep))</code></pre>
 <pre><code>## [1] 136</code></pre>
+<p>Yes, there is 136 NAs in total.</p>
 <ol start="5" style="list-style-type: decimal">
-<li><p>Show a list of the column names is this data frame.</p></li>
-<li><p>How many herbivores are represented in the data?</p></li>
-<li><p>We are interested in two groups; small and large mammals. Let’s
+<li>Show a list of the column names is this data frame.</li>
+</ol>
+<pre class="r"><code>colnames(sleep)</code></pre>
+<pre><code>##  [1] &quot;name&quot;         &quot;genus&quot;        &quot;vore&quot;         &quot;order&quot;        &quot;conservation&quot;
+##  [6] &quot;sleep_total&quot;  &quot;sleep_rem&quot;    &quot;sleep_cycle&quot;  &quot;awake&quot;        &quot;brainwt&quot;     
+## [11] &quot;bodywt&quot;</code></pre>
+<ol start="6" style="list-style-type: decimal">
+<li>How many herbivores are represented in the data?</li>
+</ol>
+<pre class="r"><code>table(sleep$vore)</code></pre>
+<pre><code>## 
+##   carni   herbi insecti    omni 
+##      19      32       5      20</code></pre>
+<p>There are 32 herbi in the data.</p>
+<ol start="7" style="list-style-type: decimal">
+<li>We are interested in two groups; small and large mammals. Let’s
 define small as less than or equal to 19kg body weight and large as
 greater than or equal to 200kg body weight. Make two new dataframes
-(large and small) based on these parameters.</p></li>
-<li><p>What is the mean weight for both the small and large
-mammals?</p></li>
-<li><p>Using a similar approach as above, do large or small animals
-sleep longer on average?</p></li>
-<li><p>Which animal is the sleepiest among the entire
-dataframe?</p></li>
+(large and small) based on these parameters.</li>
 </ol>
+<pre class="r"><code>large &lt;- filter(sleep, bodywt &gt;= 200)
+
+small &lt;- filter(sleep, bodywt &lt;= 19 )</code></pre>
+<ol start="8" style="list-style-type: decimal">
+<li>What is the mean weight for both the small and large mammals?</li>
+</ol>
+<pre class="r"><code>small_means &lt;- mean(small$bodywt);small_means</code></pre>
+<pre><code>## [1] 1.797847</code></pre>
+<pre class="r"><code>large_means &lt;- mean(large$bodywt);large_means</code></pre>
+<pre><code>## [1] 1747.071</code></pre>
+<p>The mean weight for small mammals is 1.797847kg, and the mean weight
+for large mammals is 1747.071kg</p>
+<ol start="9" style="list-style-type: decimal">
+<li>Using a similar approach as above, do large or small animals sleep
+longer on average?</li>
+</ol>
+<pre class="r"><code>small_time &lt;- mean(small$sleep_total);small_time</code></pre>
+<pre><code>## [1] 11.78644</code></pre>
+<pre class="r"><code>large_time &lt;- mean(large$sleep_total);large_time</code></pre>
+<pre><code>## [1] 3.3</code></pre>
+<p>Small animals sleep longer on average.</p>
+<ol start="10" style="list-style-type: decimal">
+<li>Which animal is the sleepiest among the entire dataframe?</li>
+</ol>
+<pre class="r"><code>summary(sleep)## max = 19.9</code></pre>
+<pre><code>##      name              genus               vore              order          
+##  Length:83          Length:83          Length:83          Length:83         
+##  Class :character   Class :character   Class :character   Class :character  
+##  Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+##                                                                             
+##                                                                             
+##                                                                             
+##                                                                             
+##  conservation        sleep_total      sleep_rem      sleep_cycle    
+##  Length:83          Min.   : 1.90   Min.   :0.100   Min.   :0.1167  
+##  Class :character   1st Qu.: 7.85   1st Qu.:0.900   1st Qu.:0.1833  
+##  Mode  :character   Median :10.10   Median :1.500   Median :0.3333  
+##                     Mean   :10.43   Mean   :1.875   Mean   :0.4396  
+##                     3rd Qu.:13.75   3rd Qu.:2.400   3rd Qu.:0.5792  
+##                     Max.   :19.90   Max.   :6.600   Max.   :1.5000  
+##                                     NA&#39;s   :22      NA&#39;s   :51      
+##      awake          brainwt            bodywt        
+##  Min.   : 4.10   Min.   :0.00014   Min.   :   0.005  
+##  1st Qu.:10.25   1st Qu.:0.00290   1st Qu.:   0.174  
+##  Median :13.90   Median :0.01240   Median :   1.670  
+##  Mean   :13.57   Mean   :0.28158   Mean   : 166.136  
+##  3rd Qu.:16.15   3rd Qu.:0.12550   3rd Qu.:  41.750  
+##  Max.   :22.10   Max.   :5.71200   Max.   :6654.000  
+##                  NA&#39;s   :27</code></pre>
+<pre class="r"><code>filter(sleep, sleep_total == 19.9)</code></pre>
+<pre><code>##               name  genus    vore      order conservation sleep_total sleep_rem
+## 1 Little brown bat Myotis insecti Chiroptera         &lt;NA&gt;        19.9         2
+##   sleep_cycle awake brainwt bodywt
+## 1         0.2   4.1 0.00025   0.01</code></pre>
+<p>Little brown bat is the sleepiest among the entire dataframe.</p>
 </div>
 </div>
 <div id="push-your-final-code-to-github" class="section level2">
