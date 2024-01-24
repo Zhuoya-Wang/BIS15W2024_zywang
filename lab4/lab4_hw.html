@@ -524,12 +524,16 @@ summary(homerange)</code></pre>
 <p><strong>3. Change the class of the variables <code>taxon</code> and
 <code>order</code> to factors and display their levels.</strong></p>
 <pre class="r"><code>homerange$taxon &lt;- as.factor(homerange$taxon)
-levels(homerange$taxon)</code></pre>
+class(homerange$taxon)</code></pre>
+<pre><code>## [1] &quot;factor&quot;</code></pre>
+<pre class="r"><code>levels(homerange$taxon)</code></pre>
 <pre><code>## [1] &quot;birds&quot;         &quot;lake fishes&quot;   &quot;lizards&quot;       &quot;mammals&quot;      
 ## [5] &quot;marine fishes&quot; &quot;river fishes&quot;  &quot;snakes&quot;        &quot;tortoises&quot;    
 ## [9] &quot;turtles&quot;</code></pre>
 <pre class="r"><code>homerange$order &lt;- as.factor(homerange$order)
-levels(homerange$order)</code></pre>
+class(homerange$order)</code></pre>
+<pre><code>## [1] &quot;factor&quot;</code></pre>
+<pre class="r"><code>levels(homerange$order)</code></pre>
 <pre><code>##  [1] &quot;accipitriformes&quot;       &quot;afrosoricida&quot;          &quot;anguilliformes&quot;       
 ##  [4] &quot;anseriformes&quot;          &quot;apterygiformes&quot;        &quot;artiodactyla&quot;         
 ##  [7] &quot;caprimulgiformes&quot;      &quot;carnivora&quot;             &quot;charadriiformes&quot;      
@@ -551,7 +555,22 @@ levels(homerange$order)</code></pre>
 data frame? Make a new data frame <code>taxa</code> that is restricted
 to taxon, common name, class, order, family, genus,
 species.</strong></p>
-<pre class="r"><code>taxa &lt;- select(homerange, &quot;taxon&quot;, &quot;common.name&quot;, &quot;class&quot;, &quot;order&quot;,&quot;family&quot;, &quot;genus&quot;,&quot;species&quot;)</code></pre>
+<pre class="r"><code>taxa &lt;- select(homerange, &quot;taxon&quot;, &quot;common.name&quot;, &quot;class&quot;, &quot;order&quot;,
+               &quot;family&quot;, &quot;genus&quot;,&quot;species&quot;);taxa</code></pre>
+<pre><code>## # A tibble: 569 × 7
+##    taxon         common.name             class        order family genus species
+##    &lt;fct&gt;         &lt;chr&gt;                   &lt;chr&gt;        &lt;fct&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;  
+##  1 lake fishes   american eel            actinoptery… angu… angui… angu… rostra…
+##  2 river fishes  blacktail redhorse      actinoptery… cypr… catos… moxo… poecil…
+##  3 river fishes  central stoneroller     actinoptery… cypr… cypri… camp… anomal…
+##  4 river fishes  rosyside dace           actinoptery… cypr… cypri… clin… fundul…
+##  5 river fishes  longnose dace           actinoptery… cypr… cypri… rhin… catara…
+##  6 river fishes  muskellunge             actinoptery… esoc… esoci… esox  masqui…
+##  7 marine fishes pollack                 actinoptery… gadi… gadid… poll… pollac…
+##  8 marine fishes saithe                  actinoptery… gadi… gadid… poll… virens 
+##  9 marine fishes lined surgeonfish       actinoptery… perc… acant… acan… lineat…
+## 10 marine fishes orangespine unicornfish actinoptery… perc… acant… naso  litura…
+## # ℹ 559 more rows</code></pre>
 <p><strong>5. The variable <code>taxon</code> identifies the common name
 groups of the species represented in <code>homerange</code>. Make a
 table the shows the counts for each of these

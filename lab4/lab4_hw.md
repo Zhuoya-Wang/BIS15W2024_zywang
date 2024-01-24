@@ -184,6 +184,14 @@ summary(homerange)
 
 ```r
 homerange$taxon <- as.factor(homerange$taxon)
+class(homerange$taxon)
+```
+
+```
+## [1] "factor"
+```
+
+```r
 levels(homerange$taxon)
 ```
 
@@ -196,8 +204,21 @@ levels(homerange$taxon)
 
 
 
+
+
+
 ```r
 homerange$order <- as.factor(homerange$order)
+class(homerange$order)
+```
+
+```
+## [1] "factor"
+```
+
+
+
+```r
 levels(homerange$order)
 ```
 
@@ -226,7 +247,25 @@ levels(homerange$order)
 
 
 ```r
-taxa <- select(homerange, "taxon", "common.name", "class", "order","family", "genus","species")
+taxa <- select(homerange, "taxon", "common.name", "class", "order",
+               "family", "genus","species");taxa
+```
+
+```
+## # A tibble: 569 × 7
+##    taxon         common.name             class        order family genus species
+##    <fct>         <chr>                   <chr>        <fct> <chr>  <chr> <chr>  
+##  1 lake fishes   american eel            actinoptery… angu… angui… angu… rostra…
+##  2 river fishes  blacktail redhorse      actinoptery… cypr… catos… moxo… poecil…
+##  3 river fishes  central stoneroller     actinoptery… cypr… cypri… camp… anomal…
+##  4 river fishes  rosyside dace           actinoptery… cypr… cypri… clin… fundul…
+##  5 river fishes  longnose dace           actinoptery… cypr… cypri… rhin… catara…
+##  6 river fishes  muskellunge             actinoptery… esoc… esoci… esox  masqui…
+##  7 marine fishes pollack                 actinoptery… gadi… gadid… poll… pollac…
+##  8 marine fishes saithe                  actinoptery… gadi… gadid… poll… virens 
+##  9 marine fishes lined surgeonfish       actinoptery… perc… acant… acan… lineat…
+## 10 marine fishes orangespine unicornfish actinoptery… perc… acant… naso  litura…
+## # ℹ 559 more rows
 ```
 
 

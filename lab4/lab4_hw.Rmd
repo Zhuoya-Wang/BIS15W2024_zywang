@@ -61,13 +61,26 @@ summary(homerange)
 **3. Change the class of the variables `taxon` and `order` to factors and display their levels.**  
 ```{r}
 homerange$taxon <- as.factor(homerange$taxon)
+class(homerange$taxon)
+
+```
+```{r}
 levels(homerange$taxon)
 ```
 
 
 
+
+
+
 ```{r}
 homerange$order <- as.factor(homerange$order)
+class(homerange$order)
+
+```
+
+
+```{r}
 levels(homerange$order)
 ```
 
@@ -75,7 +88,8 @@ levels(homerange$order)
 **4. What taxa are represented in the `homerange` data frame? Make a new data frame `taxa` that is restricted to taxon, common name, class, order, family, genus, species.**  
 
 ```{r}
-taxa <- select(homerange, "taxon", "common.name", "class", "order","family", "genus","species")
+taxa <- select(homerange, "taxon", "common.name", "class", "order",
+               "family", "genus","species");taxa
 ```
 
 
@@ -88,6 +102,7 @@ table(homerange$taxon)
 **6. The species in `homerange` are also classified into trophic guilds. How many species are represented in each trophic guild.**  
 ```{r}
 table(homerange$trophic.guild)
+
 ```
 
 **7. Make two new data frames, one which is restricted to carnivores and another that is restricted to herbivores.**  
