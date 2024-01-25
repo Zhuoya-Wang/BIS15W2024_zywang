@@ -141,15 +141,23 @@ names(homerange)
 new_df <- filter(homerange, order == "strigiformes")
 owls <- select(new_df, "mean.mass.g", "log10.mass", "family", "genus", "species");owls
 
+smallest <- min(new_df$mean.mass.g);smallest
+
+smallest_owl <- filter(homerange, mean.mass.g == smallest);smallest_owl
 ```
 
-
+The owl with a common name called Eurasian pygmy owl has the smallest mass mean.
+[Erasian gygmy owl](https://animaldiversity.org/accounts/Glaucidium_passerinum/)
 
 **10. As measured by the data, which bird species has the largest homerange? Show all of your work, please. Look this species up online and tell me about it!**.  
 ```{r}
+large_home <- max(homerange$mean.hra.m2);large_home
+
+lareg_bird <- filter(homerange, mean.hra.m2 == large_home );lareg_bird
+
 
 ```
-
+Reindeer has the largest homerange in the data. [reindeer (tarandus)](https://animaldiversity.org/accounts/Rangifer_tarandus/)
 
 
 ## Push your final code to GitHub!
