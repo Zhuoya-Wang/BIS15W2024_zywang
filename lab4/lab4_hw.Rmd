@@ -151,13 +151,15 @@ The owl with a common name called Eurasian pygmy owl has the smallest mass mean.
 
 **10. As measured by the data, which bird species has the largest homerange? Show all of your work, please. Look this species up online and tell me about it!**.  
 ```{r}
-large_home <- max(homerange$mean.hra.m2);large_home
+
+birds <- filter(homerange, taxon == "birds")
+large_home <- max(birds$mean.hra.m2);large_home
 
 lareg_bird <- filter(homerange, mean.hra.m2 == large_home );lareg_bird
 
 
 ```
-Reindeer has the largest homerange in the data. [reindeer (tarandus)](https://animaldiversity.org/accounts/Rangifer_tarandus/)
+Caracara has the largest homerange in the data. [caracara (cheriway)](https://animaldiversity.org/accounts/Caracara_cheriway/)
 
 
 ## Push your final code to GitHub!

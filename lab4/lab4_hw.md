@@ -419,11 +419,12 @@ The owl with a common name called Eurasian pygmy owl has the smallest mass mean.
 **10. As measured by the data, which bird species has the largest homerange? Show all of your work, please. Look this species up online and tell me about it!**.  
 
 ```r
-large_home <- max(homerange$mean.hra.m2);large_home
+birds <- filter(homerange, taxon == "birds")
+large_home <- max(birds$mean.hra.m2);large_home
 ```
 
 ```
-## [1] 3550830977
+## [1] 2.41e+08
 ```
 
 ```r
@@ -432,16 +433,16 @@ lareg_bird <- filter(homerange, mean.hra.m2 == large_home );lareg_bird
 
 ```
 ## # A tibble: 1 × 24
-##   taxon   common.name class    order    family genus species primarymethod N    
-##   <fct>   <chr>       <chr>    <fct>    <chr>  <chr> <chr>   <chr>         <chr>
-## 1 mammals reindeer    mammalia artioda… cervi… rang… tarand… telemetry*    <NA> 
+##   taxon common.name class order         family genus species primarymethod N    
+##   <fct> <chr>       <chr> <fct>         <chr>  <chr> <chr>   <chr>         <chr>
+## 1 birds caracara    aves  falconiformes falco… cara… cheriw… telemetry     26   
 ## # ℹ 15 more variables: mean.mass.g <dbl>, log10.mass <dbl>,
 ## #   alternative.mass.reference <chr>, mean.hra.m2 <dbl>, log10.hra <dbl>,
 ## #   hra.reference <chr>, realm <chr>, thermoregulation <chr>, locomotion <chr>,
 ## #   trophic.guild <chr>, dimension <dbl>, preymass <dbl>, log10.preymass <dbl>,
 ## #   PPMR <dbl>, prey.size.reference <chr>
 ```
-Reindeer has the largest homerange in the data. [reindeer (tarandus)](https://animaldiversity.org/accounts/Rangifer_tarandus/)
+Caracara has the largest homerange in the data. [caracara (cheriway)](https://animaldiversity.org/accounts/Caracara_cheriway/)
 
 
 ## Push your final code to GitHub!

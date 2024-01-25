@@ -654,20 +654,21 @@ gygmy owl</a></p>
 <p><strong>10. As measured by the data, which bird species has the
 largest homerange? Show all of your work, please. Look this species up
 online and tell me about it!</strong>.</p>
-<pre class="r"><code>large_home &lt;- max(homerange$mean.hra.m2);large_home</code></pre>
-<pre><code>## [1] 3550830977</code></pre>
+<pre class="r"><code>birds &lt;- filter(homerange, taxon == &quot;birds&quot;)
+large_home &lt;- max(birds$mean.hra.m2);large_home</code></pre>
+<pre><code>## [1] 2.41e+08</code></pre>
 <pre class="r"><code>lareg_bird &lt;- filter(homerange, mean.hra.m2 == large_home );lareg_bird</code></pre>
 <pre><code>## # A tibble: 1 × 24
-##   taxon   common.name class    order    family genus species primarymethod N    
-##   &lt;fct&gt;   &lt;chr&gt;       &lt;chr&gt;    &lt;fct&gt;    &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;         &lt;chr&gt;
-## 1 mammals reindeer    mammalia artioda… cervi… rang… tarand… telemetry*    &lt;NA&gt; 
+##   taxon common.name class order         family genus species primarymethod N    
+##   &lt;fct&gt; &lt;chr&gt;       &lt;chr&gt; &lt;fct&gt;         &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;         &lt;chr&gt;
+## 1 birds caracara    aves  falconiformes falco… cara… cheriw… telemetry     26   
 ## # ℹ 15 more variables: mean.mass.g &lt;dbl&gt;, log10.mass &lt;dbl&gt;,
 ## #   alternative.mass.reference &lt;chr&gt;, mean.hra.m2 &lt;dbl&gt;, log10.hra &lt;dbl&gt;,
 ## #   hra.reference &lt;chr&gt;, realm &lt;chr&gt;, thermoregulation &lt;chr&gt;, locomotion &lt;chr&gt;,
 ## #   trophic.guild &lt;chr&gt;, dimension &lt;dbl&gt;, preymass &lt;dbl&gt;, log10.preymass &lt;dbl&gt;,
 ## #   PPMR &lt;dbl&gt;, prey.size.reference &lt;chr&gt;</code></pre>
-<p>Reindeer has the largest homerange in the data. <a href="https://animaldiversity.org/accounts/Rangifer_tarandus/">reindeer
-(tarandus)</a></p>
+<p>Caracara has the largest homerange in the data. <a href="https://animaldiversity.org/accounts/Caracara_cheriway/">caracara
+(cheriway)</a></p>
 </div>
 <div id="push-your-final-code-to-github" class="section level2">
 <h2>Push your final code to GitHub!</h2>
