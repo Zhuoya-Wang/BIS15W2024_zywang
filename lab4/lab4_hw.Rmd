@@ -64,6 +64,9 @@ homerange$taxon <- as.factor(homerange$taxon)
 class(homerange$taxon)
 
 ```
+
+
+
 ```{r}
 levels(homerange$taxon)
 ```
@@ -107,27 +110,47 @@ table(homerange$trophic.guild)
 
 **7. Make two new data frames, one which is restricted to carnivores and another that is restricted to herbivores.**  
 ```{r}
-
+carnivore <- filter(homerange, trophic.guild == "carnivore")
+herbivore <- filter(homerange, trophic.guild == "herbivore")
 ```
+
 
 **8. Do herbivores or carnivores have, on average, a larger `mean.hra.m2`? Remove any NAs from the data.**  
 ```{r}
+sum(is.na(carnivore$mean.hra.m2))
+sum(is.na(herbivore$mean.hra.m2))
 
 ```
+
+No NAs need to be removed. 
 
 ```{r}
+mean_carni <- mean(carnivore$mean.hra.m2);mean_carni
 
+mean_herbi <- mean(herbivore$mean.hra.m2);mean_herbi
 ```
+
+Herbivores have a larger mean than cornivores on "mean.hra.m2"
+
+
+
 
 **9. Make a new dataframe `owls` that is limited to the mean mass, log10 mass, family, genus, and species of owls in the database. Which is the smallest owl? What is its common name? Do a little bit of searching online to see what you can learn about this species and provide a link below** 
 ```{r}
+names(homerange)
+new_df <- filter(homerange, order == "strigiformes")
+owls <- select(new_df, "mean.mass.g", "log10.mass", "family", "genus", "species");owls
 
 ```
+
+
 
 **10. As measured by the data, which bird species has the largest homerange? Show all of your work, please. Look this species up online and tell me about it!**.  
 ```{r}
 
 ```
+
+
 
 ## Push your final code to GitHub!
 Please be sure that you check the `keep md` file in the knit preferences.   

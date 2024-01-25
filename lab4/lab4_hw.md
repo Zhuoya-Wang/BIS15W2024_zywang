@@ -1,7 +1,7 @@
 ---
 title: "Lab 4 Homework"
 author: "Zhuoya Wang"
-date: "2024-01-23"
+date: "2024-01-25"
 output:
   html_document: 
     theme: spacelab
@@ -191,6 +191,9 @@ class(homerange$taxon)
 ## [1] "factor"
 ```
 
+
+
+
 ```r
 levels(homerange$taxon)
 ```
@@ -297,16 +300,100 @@ table(homerange$trophic.guild)
 
 **7. Make two new data frames, one which is restricted to carnivores and another that is restricted to herbivores.**  
 
+```r
+carnivore <- filter(homerange, trophic.guild == "carnivore")
+herbivore <- filter(homerange, trophic.guild == "herbivore")
+```
+
 
 **8. Do herbivores or carnivores have, on average, a larger `mean.hra.m2`? Remove any NAs from the data.**  
+
+```r
+sum(is.na(carnivore$mean.hra.m2))
+```
+
+```
+## [1] 0
+```
+
+```r
+sum(is.na(herbivore$mean.hra.m2))
+```
+
+```
+## [1] 0
+```
+
+No NAs need to be removed. 
+
+
+```r
+mean_carni <- mean(carnivore$mean.hra.m2);mean_carni
+```
+
+```
+## [1] 13039918
+```
+
+```r
+mean_herbi <- mean(herbivore$mean.hra.m2);mean_herbi
+```
+
+```
+## [1] 34137012
+```
+
+Herbivores have a larger mean than cornivores on "mean.hra.m2"
 
 
 
 
 **9. Make a new dataframe `owls` that is limited to the mean mass, log10 mass, family, genus, and species of owls in the database. Which is the smallest owl? What is its common name? Do a little bit of searching online to see what you can learn about this species and provide a link below** 
 
+```r
+names(homerange)
+```
+
+```
+##  [1] "taxon"                      "common.name"               
+##  [3] "class"                      "order"                     
+##  [5] "family"                     "genus"                     
+##  [7] "species"                    "primarymethod"             
+##  [9] "N"                          "mean.mass.g"               
+## [11] "log10.mass"                 "alternative.mass.reference"
+## [13] "mean.hra.m2"                "log10.hra"                 
+## [15] "hra.reference"              "realm"                     
+## [17] "thermoregulation"           "locomotion"                
+## [19] "trophic.guild"              "dimension"                 
+## [21] "preymass"                   "log10.preymass"            
+## [23] "PPMR"                       "prey.size.reference"
+```
+
+```r
+new_df <- filter(homerange, order == "strigiformes")
+owls <- select(new_df, "mean.mass.g", "log10.mass", "family", "genus", "species");owls
+```
+
+```
+## # A tibble: 9 × 5
+##   mean.mass.g log10.mass family    genus      species    
+##         <dbl>      <dbl> <chr>     <chr>      <chr>      
+## 1       119         2.08 strigidae aegolius   funereus   
+## 2       252         2.40 strigidae asio       otus       
+## 3       156.        2.19 strigidae athene     noctua     
+## 4      2191         3.34 strigidae bubo       bubo       
+## 5      1510         3.18 strigidae bubo       virginianus
+## 6        61.3       1.79 strigidae glaucidium passerinum 
+## 7      1920         3.28 strigidae nyctea     scandiaca  
+## 8       519         2.72 strigidae strix      aluco      
+## 9       285         2.45 tytonidae tyto       alba
+```
+
+
 
 **10. As measured by the data, which bird species has the largest homerange? Show all of your work, please. Look this species up online and tell me about it!**.  
+
+
 
 
 ## Push your final code to GitHub!
