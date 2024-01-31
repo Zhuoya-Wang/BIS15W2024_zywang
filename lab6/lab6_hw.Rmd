@@ -132,7 +132,7 @@ human200 <- bad_guys %>%
 green_hair <- superhero_info %>%
   filter(hair_color == "Green")
 
-hair_counts <- table(green_hair$alignment)
+hair_counts <- table(green_hair$alignment);hair_counts
 
 ```
 
@@ -186,7 +186,7 @@ head(superhero_powers, 10)
 
 ```{r}
 
-superhero_powers <- clean_names(superhero_powers)
+superhero_powers <- clean_names(superhero_powers);superhero_powers
 comb_heros <- superhero_powers%>%
   filter(agility == "TRUE" & stealth == "TRUE" & super_strength == "TRUE");comb_heros
 

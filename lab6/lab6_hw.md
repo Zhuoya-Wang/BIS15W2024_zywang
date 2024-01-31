@@ -411,7 +411,13 @@ human200 <- bad_guys %>%
 green_hair <- superhero_info %>%
   filter(hair_color == "Green")
 
-hair_counts <- table(green_hair$alignment)
+hair_counts <- table(green_hair$alignment);hair_counts
+```
+
+```
+## 
+##  bad good 
+##    1    7
 ```
 
 
@@ -722,7 +728,33 @@ head(superhero_powers, 10)
 
 
 ```r
-superhero_powers <- clean_names(superhero_powers)
+superhero_powers <- clean_names(superhero_powers);superhero_powers
+```
+
+```
+## # A tibble: 667 × 168
+##    hero_names    agility accelerated_healing lantern_power_ring
+##    <chr>         <lgl>   <lgl>               <lgl>             
+##  1 3-D Man       TRUE    FALSE               FALSE             
+##  2 A-Bomb        FALSE   TRUE                FALSE             
+##  3 Abe Sapien    TRUE    TRUE                FALSE             
+##  4 Abin Sur      FALSE   FALSE               TRUE              
+##  5 Abomination   FALSE   TRUE                FALSE             
+##  6 Abraxas       FALSE   FALSE               FALSE             
+##  7 Absorbing Man FALSE   FALSE               FALSE             
+##  8 Adam Monroe   FALSE   TRUE                FALSE             
+##  9 Adam Strange  FALSE   FALSE               FALSE             
+## 10 Agent Bob     FALSE   FALSE               FALSE             
+## # ℹ 657 more rows
+## # ℹ 164 more variables: dimensional_awareness <lgl>, cold_resistance <lgl>,
+## #   durability <lgl>, stealth <lgl>, energy_absorption <lgl>, flight <lgl>,
+## #   danger_sense <lgl>, underwater_breathing <lgl>, marksmanship <lgl>,
+## #   weapons_master <lgl>, power_augmentation <lgl>, animal_attributes <lgl>,
+## #   longevity <lgl>, intelligence <lgl>, super_strength <lgl>,
+## #   cryokinesis <lgl>, telepathy <lgl>, energy_armor <lgl>, …
+```
+
+```r
 comb_heros <- superhero_powers%>%
   filter(agility == "TRUE" & stealth == "TRUE" & super_strength == "TRUE");comb_heros
 ```

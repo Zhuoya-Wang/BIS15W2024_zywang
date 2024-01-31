@@ -1836,7 +1836,10 @@ height?</li>
 <pre class="r"><code>green_hair &lt;- superhero_info %&gt;%
   filter(hair_color == &quot;Green&quot;)
 
-hair_counts &lt;- table(green_hair$alignment)</code></pre>
+hair_counts &lt;- table(green_hair$alignment);hair_counts</code></pre>
+<pre><code>## 
+##  bad good 
+##    1    7</code></pre>
 <ol start="10" style="list-style-type: decimal">
 <li>Let’s explore who the really small superheros are. In the
 <code>superhero_info</code> data, which have a weight less than 50? Be
@@ -2103,8 +2106,28 @@ frame.</p>
 <li>How many superheros have a combination of agility, stealth,
 super_strength, stamina?</li>
 </ol>
-<pre class="r"><code>superhero_powers &lt;- clean_names(superhero_powers)
-comb_heros &lt;- superhero_powers%&gt;%
+<pre class="r"><code>superhero_powers &lt;- clean_names(superhero_powers);superhero_powers</code></pre>
+<pre><code>## # A tibble: 667 × 168
+##    hero_names    agility accelerated_healing lantern_power_ring
+##    &lt;chr&gt;         &lt;lgl&gt;   &lt;lgl&gt;               &lt;lgl&gt;             
+##  1 3-D Man       TRUE    FALSE               FALSE             
+##  2 A-Bomb        FALSE   TRUE                FALSE             
+##  3 Abe Sapien    TRUE    TRUE                FALSE             
+##  4 Abin Sur      FALSE   FALSE               TRUE              
+##  5 Abomination   FALSE   TRUE                FALSE             
+##  6 Abraxas       FALSE   FALSE               FALSE             
+##  7 Absorbing Man FALSE   FALSE               FALSE             
+##  8 Adam Monroe   FALSE   TRUE                FALSE             
+##  9 Adam Strange  FALSE   FALSE               FALSE             
+## 10 Agent Bob     FALSE   FALSE               FALSE             
+## # ℹ 657 more rows
+## # ℹ 164 more variables: dimensional_awareness &lt;lgl&gt;, cold_resistance &lt;lgl&gt;,
+## #   durability &lt;lgl&gt;, stealth &lt;lgl&gt;, energy_absorption &lt;lgl&gt;, flight &lt;lgl&gt;,
+## #   danger_sense &lt;lgl&gt;, underwater_breathing &lt;lgl&gt;, marksmanship &lt;lgl&gt;,
+## #   weapons_master &lt;lgl&gt;, power_augmentation &lt;lgl&gt;, animal_attributes &lt;lgl&gt;,
+## #   longevity &lt;lgl&gt;, intelligence &lt;lgl&gt;, super_strength &lt;lgl&gt;,
+## #   cryokinesis &lt;lgl&gt;, telepathy &lt;lgl&gt;, energy_armor &lt;lgl&gt;, …</code></pre>
+<pre class="r"><code>comb_heros &lt;- superhero_powers%&gt;%
   filter(agility == &quot;TRUE&quot; &amp; stealth == &quot;TRUE&quot; &amp; super_strength == &quot;TRUE&quot;);comb_heros</code></pre>
 <pre><code>## # A tibble: 48 × 168
 ##    hero_names  agility accelerated_healing lantern_power_ring
