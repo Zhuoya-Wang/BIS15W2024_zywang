@@ -99,7 +99,25 @@ names(superhero_info)
 ```
 
 ```r
-superhero_info <- clean_names(superhero_info)
+superhero_info <- clean_names(superhero_info);superhero_info
+```
+
+```
+## # A tibble: 734 × 10
+##    name  gender eye_color race  hair_color height publisher skin_color alignment
+##    <chr> <chr>  <chr>     <chr> <chr>       <dbl> <chr>     <chr>      <chr>    
+##  1 A-Bo… Male   yellow    Human No Hair       203 Marvel C… <NA>       good     
+##  2 Abe … Male   blue      Icth… No Hair       191 Dark Hor… blue       good     
+##  3 Abin… Male   blue      Unga… No Hair       185 DC Comics red        good     
+##  4 Abom… Male   green     Huma… No Hair       203 Marvel C… <NA>       bad      
+##  5 Abra… Male   blue      Cosm… Black          NA Marvel C… <NA>       bad      
+##  6 Abso… Male   blue      Human No Hair       193 Marvel C… <NA>       bad      
+##  7 Adam… Male   blue      <NA>  Blond          NA NBC - He… <NA>       good     
+##  8 Adam… Male   blue      Human Blond         185 DC Comics <NA>       good     
+##  9 Agen… Female blue      <NA>  Blond         173 Marvel C… <NA>       good     
+## 10 Agen… Male   brown     Human Brown         178 Marvel C… <NA>       good     
+## # ℹ 724 more rows
+## # ℹ 1 more variable: weight <dbl>
 ```
 
 
