@@ -1,5 +1,6 @@
 ---
 title: "dplyr Superhero"
+author: "Zhuoya Wang"
 date: "2024-01-30"
 output:
   html_document: 
