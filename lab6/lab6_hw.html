@@ -1542,8 +1542,7 @@ final code to GitHub.</p>
 ## ✖ dplyr::filter() masks stats::filter()
 ## ✖ dplyr::lag()    masks stats::lag()
 ## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-<pre class="r"><code>#install.packages(&quot;janitor&quot;)
-library(&quot;janitor&quot;)</code></pre>
+<pre class="r"><code>library(&quot;janitor&quot;)</code></pre>
 <pre><code>## 
 ## Attaching package: &#39;janitor&#39;
 ## 
@@ -1569,7 +1568,7 @@ intact.</p>
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<pre class="r"><code>superhero_powers &lt;- read_csv(&quot;data/super_hero_powers.csv&quot;, na = c(&quot;&quot;, &quot;-99&quot;, &quot;-&quot;)) </code></pre>
+<pre class="r"><code>superhero_powers &lt;- read_csv(&quot;data/super_hero_powers.csv&quot;, na = c(&quot;&quot;, &quot;-99&quot;, &quot;-&quot;))</code></pre>
 <pre><code>## Rows: 667 Columns: 168
 ## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
@@ -1578,7 +1577,6 @@ intact.</p>
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<pre class="r"><code># define what is NA in dataset</code></pre>
 </div>
 <div id="data-tidy" class="section level2">
 <h2>Data tidy</h2>
@@ -1661,30 +1659,43 @@ and “race”. How would you isolate these variables from
 <code>superhero_info</code>?</li>
 </ol>
 <pre class="r"><code>interst_col &lt;- superhero_info%&gt;%
-  select(name, alignment, race)</code></pre>
+  select(name, alignment, race);interst_col</code></pre>
+<pre><code>## # A tibble: 734 × 3
+##    name          alignment race             
+##    &lt;chr&gt;         &lt;chr&gt;     &lt;chr&gt;            
+##  1 A-Bomb        good      Human            
+##  2 Abe Sapien    good      Icthyo Sapien    
+##  3 Abin Sur      good      Ungaran          
+##  4 Abomination   bad       Human / Radiation
+##  5 Abraxas       bad       Cosmic Entity    
+##  6 Absorbing Man bad       Human            
+##  7 Adam Monroe   good      &lt;NA&gt;             
+##  8 Adam Strange  good      Human            
+##  9 Agent 13      good      &lt;NA&gt;             
+## 10 Agent Bob     good      Human            
+## # ℹ 724 more rows</code></pre>
 </div>
 <div id="not-human" class="section level2">
 <h2>Not Human</h2>
 <ol start="4" style="list-style-type: decimal">
 <li>List all of the superheros that are not human.</li>
 </ol>
-<pre class="r"><code>heros &lt;- select(superhero_info, &quot;race&quot;, &quot;name&quot;)
-
-no_heros &lt;- filter(heros, race != &quot;Human&quot;);no_heros</code></pre>
-<pre><code>## # A tibble: 222 × 2
-##    race              name        
-##    &lt;chr&gt;             &lt;chr&gt;       
-##  1 Icthyo Sapien     Abe Sapien  
-##  2 Ungaran           Abin Sur    
-##  3 Human / Radiation Abomination 
-##  4 Cosmic Entity     Abraxas     
-##  5 Cyborg            Ajax        
-##  6 Xenomorph XX121   Alien       
-##  7 Android           Amazo       
-##  8 Vampire           Angel       
-##  9 Mutant            Angel Dust  
-## 10 God / Eternal     Anti-Monitor
-## # ℹ 212 more rows</code></pre>
+<pre class="r"><code>not_human &lt;- filter(superhero_info, race != &quot;Human&quot;);not_human</code></pre>
+<pre><code>## # A tibble: 222 × 10
+##    name  gender eye_color race  hair_color height publisher skin_color alignment
+##    &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;    
+##  1 Abe … Male   blue      Icth… No Hair       191 Dark Hor… blue       good     
+##  2 Abin… Male   blue      Unga… No Hair       185 DC Comics red        good     
+##  3 Abom… Male   green     Huma… No Hair       203 Marvel C… &lt;NA&gt;       bad      
+##  4 Abra… Male   blue      Cosm… Black          NA Marvel C… &lt;NA&gt;       bad      
+##  5 Ajax  Male   brown     Cybo… Black         193 Marvel C… &lt;NA&gt;       bad      
+##  6 Alien Male   &lt;NA&gt;      Xeno… No Hair       244 Dark Hor… black      bad      
+##  7 Amazo Male   red       Andr… &lt;NA&gt;          257 DC Comics &lt;NA&gt;       bad      
+##  8 Angel Male   &lt;NA&gt;      Vamp… &lt;NA&gt;           NA Dark Hor… &lt;NA&gt;       good     
+##  9 Ange… Female yellow    Muta… Black         165 Marvel C… &lt;NA&gt;       good     
+## 10 Anti… Male   yellow    God … No Hair        61 DC Comics &lt;NA&gt;       bad      
+## # ℹ 212 more rows
+## # ℹ 1 more variable: weight &lt;dbl&gt;</code></pre>
 </div>
 <div id="good-and-evil" class="section level2">
 <h2>Good and Evil</h2>
@@ -1793,7 +1804,7 @@ height?</li>
 ##  [6] &quot;height&quot;     &quot;publisher&quot;  &quot;skin_color&quot; &quot;alignment&quot;  &quot;weight&quot;</code></pre>
 <pre class="r"><code>human200 &lt;- bad_guys %&gt;%
   select(name, gender, race, height)%&gt;%
-  filter(gender == &quot;Male&quot;, race == &quot;Human&quot;, height &gt; 200);human200</code></pre>
+  filter(gender == &quot;Male&quot;&amp; race == &quot;Human&quot;&amp; height &gt; 200);human200</code></pre>
 <pre><code>## # A tibble: 5 × 4
 ##   name        gender race  height
 ##   &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt;  &lt;dbl&gt;
@@ -2117,6 +2128,10 @@ comb_heros &lt;- superhero_powers%&gt;%
 ## #   longevity &lt;lgl&gt;, intelligence &lt;lgl&gt;, super_strength &lt;lgl&gt;,
 ## #   cryokinesis &lt;lgl&gt;, telepathy &lt;lgl&gt;, energy_armor &lt;lgl&gt;,
 ## #   energy_blasts &lt;lgl&gt;, duplication &lt;lgl&gt;, size_changing &lt;lgl&gt;, …</code></pre>
+<ol start="15" style="list-style-type: decimal">
+<li>Can you find your hero in the superhero_info data? Show their
+info!</li>
+</ol>
 <pre class="r"><code>superhero_info%&gt;%
   filter(name == &quot;Doctor Strange&quot;)</code></pre>
 <pre><code>## # A tibble: 1 × 10
@@ -2124,10 +2139,6 @@ comb_heros &lt;- superhero_powers%&gt;%
 ##   &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;    
 ## 1 Docto… Male   grey      Human Black         188 Marvel C… &lt;NA&gt;       good     
 ## # ℹ 1 more variable: weight &lt;dbl&gt;</code></pre>
-<ol start="15" style="list-style-type: decimal">
-<li>Can you find your hero in the superhero_info data? Show their
-info!</li>
-</ol>
 </div>
 <div id="push-your-final-code-to-github" class="section level2">
 <h2>Push your final code to GitHub!</h2>
