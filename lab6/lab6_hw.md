@@ -419,6 +419,7 @@ hair_counts <- table(green_hair$alignment);hair_counts
 ##  bad good 
 ##    1    7
 ```
+There are more good guys with green hair!
 
 
 10. Let's explore who the really small superheros are. In the `superhero_info` data, which have a weight less than 50? Be sure to sort your results by weight lowest to highest.  
@@ -782,6 +783,7 @@ comb_heros <- superhero_powers%>%
 ## #   cryokinesis <lgl>, telepathy <lgl>, energy_armor <lgl>, …
 ```
 
+There are 48 heros have a combination of agility, stealth, super_strength, stamina
 
 ## Your Favorite
 14. Pick your favorite superhero and let's see their powers! 
