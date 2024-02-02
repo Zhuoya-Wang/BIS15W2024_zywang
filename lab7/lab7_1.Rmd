@@ -136,6 +136,8 @@ msleep %>%
   filter(bodywt > 100)
 ```
 
+
+
 n_distinct() is a very handy way of cleanly presenting the number of distinct observations. Here we show the number of distinct genera over 100 in body weight.
 ```{r}
 msleep%>%
