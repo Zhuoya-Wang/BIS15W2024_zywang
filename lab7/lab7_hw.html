@@ -11,7 +11,7 @@
 
 <meta name="author" content="Zhuoya Wang" />
 
-<meta name="date" content="2024-02-01" />
+<meta name="date" content="2024-02-04" />
 
 <title>Lab 7 Homework</title>
 
@@ -376,7 +376,7 @@ display: none;
 
 <h1 class="title toc-ignore">Lab 7 Homework</h1>
 <h4 class="author">Zhuoya Wang</h4>
-<h4 class="date">2024-02-01</h4>
+<h4 class="date">2024-02-04</h4>
 
 </div>
 
@@ -540,12 +540,13 @@ and <code>fao_major_fishing_area</code> to data class factor.</li>
 </ol>
 <pre class="r"><code>fisheries &lt;- clean_names(fisheries)
 
-country &lt;- as.factor(fisheries$country)
+fisheries$country &lt;- as.factor(fisheries$country)
 
-isscaap_group_number &lt;- as.factor(fisheries$isscaap_group_number)
 
-asfis_species_number &lt;- as.factor(fisheries$asfis_species_number)
-fao_major_fishing_area &lt;- as.factor(fisheries$fao_major_fishing_area)</code></pre>
+fisheries$isscaap_group_number&lt;- as.factor(fisheries$isscaap_group_number)
+
+fisheries$asfis_species_number &lt;- as.factor(fisheries$asfis_species_number)
+fisheries$fao_major_fishing_area &lt;- as.factor(fisheries$fao_major_fishing_area)</code></pre>
 <p>We need to deal with the years because they are being treated as
 characters and start with an X. We also have the problem that the column
 names that are years actually represent data. We haven’t discussed tidy
@@ -572,7 +573,7 @@ list their names.</li>
   count(country)</code></pre>
 <pre><code>## # A tibble: 203 × 2
 ##    country                 n
-##    &lt;chr&gt;               &lt;int&gt;
+##    &lt;fct&gt;               &lt;int&gt;
 ##  1 Albania               934
 ##  2 Algeria              1561
 ##  3 American Samoa        556
@@ -594,7 +595,7 @@ asfis_species_name, asfis_species_number, year, catch.</li>
          asfis_species_number,year, catch);new.fish_tidy</code></pre>
 <pre><code>## # A tibble: 376,771 × 6
 ##    country isscaap_taxonomic_group asfis_species_name asfis_species_number  year
-##    &lt;chr&gt;   &lt;chr&gt;                   &lt;chr&gt;              &lt;chr&gt;                &lt;dbl&gt;
+##    &lt;fct&gt;   &lt;chr&gt;                   &lt;chr&gt;              &lt;fct&gt;                &lt;dbl&gt;
 ##  1 Albania Sharks, rays, chimaeras Squatinidae        10903XXXXX            1995
 ##  2 Albania Sharks, rays, chimaeras Squatinidae        10903XXXXX            1996
 ##  3 Albania Sharks, rays, chimaeras Squatinidae        10903XXXXX            1997
@@ -627,7 +628,7 @@ were caught as part of these data?</li>
   arrange(desc(overall_catch))</code></pre>
 <pre><code>## # A tibble: 193 × 2
 ##    country                overall_catch
-##    &lt;chr&gt;                          &lt;dbl&gt;
+##    &lt;fct&gt;                          &lt;dbl&gt;
 ##  1 Bangladesh                      1499
 ##  2 Aruba                            163
 ##  3 Iraq                              89
@@ -652,7 +653,7 @@ between the years 1990-2000?</li>
   arrange(desc(most_sp))</code></pre>
 <pre><code>## # A tibble: 37 × 2
 ##    country               most_sp
-##    &lt;chr&gt;                   &lt;dbl&gt;
+##    &lt;fct&gt;                   &lt;dbl&gt;
 ##  1 Morocco                  7470
 ##  2 Spain                    3507
 ##  3 Russian Federation       1639
@@ -678,7 +679,7 @@ between the years 1990-2000</p>
   arrange(desc(most_ce))</code></pre>
 <pre><code>## # A tibble: 16 × 2
 ##    country                  most_ce
-##    &lt;chr&gt;                      &lt;dbl&gt;
+##    &lt;fct&gt;                      &lt;dbl&gt;
 ##  1 India                        570
 ##  2 China                        257
 ##  3 Algeria                      162
@@ -735,7 +736,7 @@ between 2008-2012</p>
   arrange(desc(most_TC))</code></pre>
 <pre><code>## # A tibble: 6 × 2
 ##   country                  most_TC
-##   &lt;chr&gt;                      &lt;dbl&gt;
+##   &lt;fct&gt;                      &lt;dbl&gt;
 ## 1 Russian Federation         27317
 ## 2 United States of America   11156
 ## 3 Japan                       2208

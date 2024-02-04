@@ -43,6 +43,7 @@ Here we open a .csv file. Since we are using the tidyverse, we open the file usi
 In the previous part of the lab, you exported a `.csv` of hot springs data. Let's try to reload that `.csv`.  
 ```{r}
 hot_springs <- read_csv("hsprings_data.csv")
+
 ```
 
 Use the `str()` function to get an idea of the data structure of `hot_springs`.  

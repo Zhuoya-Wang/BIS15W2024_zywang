@@ -58,12 +58,13 @@ glimpse(fisheries)
 ```{r}
 fisheries <- clean_names(fisheries)
 
-country <- as.factor(fisheries$country)
+fisheries$country <- as.factor(fisheries$country)
 
-isscaap_group_number <- as.factor(fisheries$isscaap_group_number)
 
-asfis_species_number <- as.factor(fisheries$asfis_species_number)
-fao_major_fishing_area <- as.factor(fisheries$fao_major_fishing_area)
+fisheries$isscaap_group_number<- as.factor(fisheries$isscaap_group_number)
+
+fisheries$asfis_species_number <- as.factor(fisheries$asfis_species_number)
+fisheries$fao_major_fishing_area <- as.factor(fisheries$fao_major_fishing_area)
 
 ```
 

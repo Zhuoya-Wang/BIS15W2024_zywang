@@ -1,7 +1,7 @@
 ---
 title: "Lab 7 Homework"
 author: "Zhuoya Wang"
-date: "2024-02-01"
+date: "2024-02-04"
 output:
   html_document: 
     theme: spacelab
@@ -195,12 +195,13 @@ glimpse(fisheries)
 ```r
 fisheries <- clean_names(fisheries)
 
-country <- as.factor(fisheries$country)
+fisheries$country <- as.factor(fisheries$country)
 
-isscaap_group_number <- as.factor(fisheries$isscaap_group_number)
 
-asfis_species_number <- as.factor(fisheries$asfis_species_number)
-fao_major_fishing_area <- as.factor(fisheries$fao_major_fishing_area)
+fisheries$isscaap_group_number<- as.factor(fisheries$isscaap_group_number)
+
+fisheries$asfis_species_number <- as.factor(fisheries$asfis_species_number)
+fisheries$fao_major_fishing_area <- as.factor(fisheries$fao_major_fishing_area)
 ```
 
 We need to deal with the years because they are being treated as characters and start with an X. We also have the problem that the column names that are years actually represent data. We haven't discussed tidy data yet, so here is some help. You should run this ugly chunk to transform the data for the rest of the homework. It will only work if you have used janitor to rename the variables in question 2!  
@@ -230,7 +231,7 @@ fisheries_tidy %>%
 ```
 ## # A tibble: 203 × 2
 ##    country                 n
-##    <chr>               <int>
+##    <fct>               <int>
 ##  1 Albania               934
 ##  2 Algeria              1561
 ##  3 American Samoa        556
@@ -257,7 +258,7 @@ new.fish_tidy <- fisheries_tidy%>%
 ```
 ## # A tibble: 376,771 × 6
 ##    country isscaap_taxonomic_group asfis_species_name asfis_species_number  year
-##    <chr>   <chr>                   <chr>              <chr>                <dbl>
+##    <fct>   <chr>                   <chr>              <fct>                <dbl>
 ##  1 Albania Sharks, rays, chimaeras Squatinidae        10903XXXXX            1995
 ##  2 Albania Sharks, rays, chimaeras Squatinidae        10903XXXXX            1996
 ##  3 Albania Sharks, rays, chimaeras Squatinidae        10903XXXXX            1997
@@ -302,7 +303,7 @@ fisheries_tidy%>%
 ```
 ## # A tibble: 193 × 2
 ##    country                overall_catch
-##    <chr>                          <dbl>
+##    <fct>                          <dbl>
 ##  1 Bangladesh                      1499
 ##  2 Aruba                            163
 ##  3 Iraq                              89
@@ -334,7 +335,7 @@ fisheries_tidy%>%
 ```
 ## # A tibble: 37 × 2
 ##    country               most_sp
-##    <chr>                   <dbl>
+##    <fct>                   <dbl>
 ##  1 Morocco                  7470
 ##  2 Spain                    3507
 ##  3 Russian Federation       1639
@@ -366,7 +367,7 @@ fisheries_tidy%>%
 ```
 ## # A tibble: 16 × 2
 ##    country                  most_ce
-##    <chr>                      <dbl>
+##    <fct>                      <dbl>
 ##  1 India                        570
 ##  2 China                        257
 ##  3 Algeria                      162
@@ -438,7 +439,7 @@ fisheries_tidy%>%
 ```
 ## # A tibble: 6 × 2
 ##   country                  most_TC
-##   <chr>                      <dbl>
+##   <fct>                      <dbl>
 ## 1 Russian Federation         27317
 ## 2 United States of America   11156
 ## 3 Japan                       2208
