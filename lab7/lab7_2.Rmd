@@ -64,7 +64,7 @@ What if we are interested in the number of observations (penguins) by species an
 ```{r}
 penguins %>% 
   group_by(species, island) %>% 
-  summarize(n=n(), .groups= 'keep')#the .groups argument here just prevents a warning message
+  summarize(n=n(),.groups= 'keep')#the .groups argument here just prevents a warning message
 ```
 
 ## Counts
@@ -74,6 +74,10 @@ Although these summary functions are super helpful, oftentimes we are mostly int
 ```{r}
 penguins %>% 
   count(island, sort = T) #sort=T sorts the column in descending order
+
+penguins%>%
+  group_by(island)%>%
+  summarize(n=n())
 ```
 
 Compare this with `summarize()` and `group_by()`.
@@ -126,6 +130,8 @@ By using `across()` we can reduce the clutter and make things cleaner.
 ```{r}
 penguins %>%
   summarize(across(c(species, island, sex), n_distinct))# n_dis counts the number of unique
+
+
 ```
 
 This is very helpful for continuous variables.

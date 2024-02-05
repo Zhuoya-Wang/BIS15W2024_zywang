@@ -1,11 +1,16 @@
 ---
-title: "BIS_015L_Mid_review"
+title: "MIdterm_rv"
 author: "Zhuoya Wang"
-date: "2024-01-30"
+date: "2024-02-04"
 output: 
   html_document: 
     keep_md: true
 ---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)

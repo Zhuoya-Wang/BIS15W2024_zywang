@@ -134,6 +134,7 @@ Notice that there are multiple genera with over 100 in body weight.
 ```{r}
 msleep %>% 
   filter(bodywt > 100)
+
 ```
 
 
@@ -142,6 +143,8 @@ n_distinct() is a very handy way of cleanly presenting the number of distinct ob
 ```{r}
 msleep%>%
   summarize(n_genera = n_distinct(genus))# this is going to count the number of genera in msleep
+
+
 ```
 
 
