@@ -2,9 +2,11 @@
 title: "BIS015L-midreview"
 author: "Zhuoya Wang"
 date: "2024-02-05"
-output: 
-  html_document: 
-    keep_md: true
+output:
+  pdf_document: 
+    keep_tex: yes
+  html_document:
+    keep_md: yes
 ---
 
 
