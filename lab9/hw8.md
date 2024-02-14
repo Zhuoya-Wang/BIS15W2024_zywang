@@ -5,7 +5,7 @@ date: "2024-02-13"
 output:
   html_document: 
     theme: spacelab
-    keep_md: yes
+    keep_md: true
 ---
 
 
@@ -167,8 +167,7 @@ The quotes show the folder structure from the root directory.
 
 2. Are these data "tidy" per the definitions of the tidyverse? How do you know? Are they in wide or long format?
 
-This data is tidy because each variable has its own column, each observation 
-has its own row and each value has its own cell. they are in a long format.  
+This data is tidy because each variable has its own column, each observation has its own row and each value has its own cell. they are in a long format.  
 
 
 3. We are only interested in the variables site, date, and enterococci_cfu_100ml. Make a new object focused on these variables only. Name the object `sydneybeaches_long`
@@ -256,32 +255,14 @@ sydneybeaches_wide%>%
 6. We haven't dealt much with dates yet, but separate the date into columns day, month, and year. Do this on the `sydneybeaches_long` data.
 
 ```r
-sydneybeaches_long %>% 
+sydneybeaches_long <- sydneybeaches_long %>% 
     separate(date, into= c("day", "month", "year"), sep = "/")
-```
-
-```
-## # A tibble: 3,690 × 5
-##    site           day   month year  enterococci_cfu_100ml
-##    <chr>          <chr> <chr> <chr>                 <dbl>
-##  1 Clovelly Beach 02    01    2013                     19
-##  2 Clovelly Beach 06    01    2013                      3
-##  3 Clovelly Beach 12    01    2013                      2
-##  4 Clovelly Beach 18    01    2013                     13
-##  5 Clovelly Beach 30    01    2013                      8
-##  6 Clovelly Beach 05    02    2013                      7
-##  7 Clovelly Beach 11    02    2013                     11
-##  8 Clovelly Beach 23    02    2013                     97
-##  9 Clovelly Beach 07    03    2013                      3
-## 10 Clovelly Beach 25    03    2013                      0
-## # ℹ 3,680 more rows
 ```
 
 7. What is the average `enterococci_cfu_100ml` by year for each beach. Think about which data you will use- long or wide.
 
 ```r
-avg_cfu <- sydneybeaches_long%>% 
-  separate(date, into= c("day", "month", "year"), sep = "/")%>%
+avg_cfu <- sydneybeaches_long%>%
   group_by(year, site)%>%
   summarize(avg = mean(enterococci_cfu_100ml, na.rm = T));avg_cfu
 ```
@@ -336,6 +317,34 @@ avg_cfu_wide
 ```
 
 9. What was the most polluted beach in 2013?
+
+```r
+sydneybeaches_long%>%
+  filter(year == 2013)%>%
+  group_by(site)%>%
+  summarize(most_pol = sum(enterococci_cfu_100ml))%>%
+  arrange(desc(most_pol))
+```
+
+```
+## # A tibble: 11 × 2
+##    site                    most_pol
+##    <chr>                      <dbl>
+##  1 Little Bay Beach            7049
+##  2 Malabar Beach               5882
+##  3 South Maroubra Rockpool     3470
+##  4 Maroubra Beach              2734
+##  5 Coogee Beach                2301
+##  6 South Maroubra Beach        2282
+##  7 Bondi Beach                 1869
+##  8 Tamarama Beach              1722
+##  9 Bronte Beach                1552
+## 10 Gordons Bay (East)          1090
+## 11 Clovelly Beach               538
+```
+Little bay beach was the most polluted beach in 2013
+
+
 
 
 10. Please complete the class project survey at: [BIS 15L Group Project](https://forms.gle/H2j69Z3ZtbLH3efW6)

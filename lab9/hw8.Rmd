@@ -5,7 +5,7 @@ date: "`r Sys.Date()`"
 output:
   html_document: 
     theme: spacelab
-    keep_md: yes
+    keep_md: true
 ---
 
 ```{r setup, include=FALSE}
@@ -76,16 +76,13 @@ The quotes show the folder structure from the root directory.
 
 2. Are these data "tidy" per the definitions of the tidyverse? How do you know? Are they in wide or long format?
 
-This data is tidy because each variable has its own column, each observation 
-has its own row and each value has its own cell. they are in a long format.  
+This data is tidy because each variable has its own column, each observation has its own row and each value has its own cell. they are in a long format.  
 
 
 3. We are only interested in the variables site, date, and enterococci_cfu_100ml. Make a new object focused on these variables only. Name the object `sydneybeaches_long`
 ```{r}
 sydneybeaches_long <- select(sydneybeaches,"site", "date", 
                              "enterococci_cfu_100ml");sydneybeaches_long 
-
-
 
 ```
 
@@ -106,14 +103,13 @@ sydneybeaches_wide%>%
 
 6. We haven't dealt much with dates yet, but separate the date into columns day, month, and year. Do this on the `sydneybeaches_long` data.
 ```{r}
-sydneybeaches_long %>% 
+sydneybeaches_long <- sydneybeaches_long %>% 
     separate(date, into= c("day", "month", "year"), sep = "/")
 ```
 
 7. What is the average `enterococci_cfu_100ml` by year for each beach. Think about which data you will use- long or wide.
 ```{r}
-avg_cfu <- sydneybeaches_long%>% 
-  separate(date, into= c("day", "month", "year"), sep = "/")%>%
+avg_cfu <- sydneybeaches_long%>%
   group_by(year, site)%>%
   summarize(avg = mean(enterococci_cfu_100ml, na.rm = T));avg_cfu
   
@@ -129,9 +125,17 @@ avg_cfu_wide
 
 9. What was the most polluted beach in 2013?
 ```{r}
-
+sydneybeaches_long%>%
+  filter(year == 2013)%>%
+  group_by(site)%>%
+  summarize(most_pol = sum(enterococci_cfu_100ml))%>%
+  arrange(desc(most_pol))
 
 ```
+Little bay beach was the most polluted beach in 2013
+
+
+
 
 10. Please complete the class project survey at: [BIS 15L Group Project](https://forms.gle/H2j69Z3ZtbLH3efW6)
 
