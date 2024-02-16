@@ -5,7 +5,7 @@ date: "`r Sys.Date()`"
 output:
   html_document: 
     theme: spacelab
-    keep_md: yes
+    keep_md: true
 ---
 
 ```{r setup, include=FALSE}
@@ -78,11 +78,35 @@ colleges%>%
   coord_flip()
 ```
 
+
 4. The column `COSTT4_A` is the annual cost of each institution. Which city has the highest average cost? Where is it located?
+```{r}
+colleges%>%
+  filter(costt4_a != "NA")%>%
+  group_by(city, stabbr)%>%
+  summarize(avg_cost = mean(costt4_a))%>%
+  arrange(desc(avg_cost))
+  
+```
+
+Claremont has the highest average cost, and it is located in CA.
 
 5. Based on your answer to #4, make a plot that compares the cost of the individual colleges in the most expensive city. Bonus! Add UC Davis here to see how it compares :>).
+```{r}
+colleges%>%
+  filter(costt4_a != "NA")%>%
+  filter(city == "Claremont"| city == "Davis")%>%
+  ggplot(aes(x = instnm, y = costt4_a))+
+  geom_col()+
+  coord_flip()
+  
+```
+
 
 6. The column `ADM_RATE` is the admissions rate by college and `C150_4_POOLED` is the four-year completion rate. Use a scatterplot to show the relationship between these two variables. What do you think this means?
+```{r}
+
+```
 
 7. Is there a relationship between cost and four-year completion rate? (You don't need to do the stats, just produce a plot). What do you think this means?
 

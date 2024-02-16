@@ -5,7 +5,7 @@ date: "2024-02-15"
 output:
   html_document: 
     theme: spacelab
-    keep_md: yes
+    keep_md: true
 ---
 
 
@@ -176,11 +176,58 @@ colleges%>%
 
 ![](hw9_files/figure-html/unnamed-chunk-5-1.png)<!-- -->
 
+
 4. The column `COSTT4_A` is the annual cost of each institution. Which city has the highest average cost? Where is it located?
+
+```r
+colleges%>%
+  filter(costt4_a != "NA")%>%
+  group_by(city, stabbr)%>%
+  summarize(avg_cost = mean(costt4_a))%>%
+  arrange(desc(avg_cost))
+```
+
+```
+## `summarise()` has grouped output by 'city'. You can override using the
+## `.groups` argument.
+```
+
+```
+## # A tibble: 132 × 3
+## # Groups:   city [132]
+##    city                stabbr avg_cost
+##    <chr>               <chr>     <dbl>
+##  1 Claremont           CA        66498
+##  2 Malibu              CA        66152
+##  3 Valencia            CA        64686
+##  4 Orange              CA        64501
+##  5 Redlands            CA        61542
+##  6 Moraga              CA        61095
+##  7 Atherton            CA        56035
+##  8 Thousand Oaks       CA        54373
+##  9 Rancho Palos Verdes CA        50758
+## 10 La Verne            CA        50603
+## # ℹ 122 more rows
+```
+
+Claremont has the highest average cost, and it is located in CA.
 
 5. Based on your answer to #4, make a plot that compares the cost of the individual colleges in the most expensive city. Bonus! Add UC Davis here to see how it compares :>).
 
+```r
+colleges%>%
+  filter(costt4_a != "NA")%>%
+  filter(city == "Claremont"| city == "Davis")%>%
+  ggplot(aes(x = instnm, y = costt4_a))+
+  geom_col()+
+  coord_flip()
+```
+
+![](hw9_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
+
+
 6. The column `ADM_RATE` is the admissions rate by college and `C150_4_POOLED` is the four-year completion rate. Use a scatterplot to show the relationship between these two variables. What do you think this means?
+
 
 7. Is there a relationship between cost and four-year completion rate? (You don't need to do the stats, just produce a plot). What do you think this means?
 
