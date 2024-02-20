@@ -1,7 +1,7 @@
 ---
 title: "Homework 9"
 author: "Zhuoya Wang"
-date: "2024-02-15"
+date: "2024-02-20"
 output:
   html_document: 
     theme: spacelab
@@ -228,8 +228,36 @@ colleges%>%
 
 6. The column `ADM_RATE` is the admissions rate by college and `C150_4_POOLED` is the four-year completion rate. Use a scatterplot to show the relationship between these two variables. What do you think this means?
 
+```r
+ggplot(data=colleges, mapping = aes(x = adm_rate, y = c150_4_pooled ))+
+  geom_point(na.rm = T)+
+  geom_smooth(method=lm, se=T, na.rm = T)
+```
+
+```
+## `geom_smooth()` using formula = 'y ~ x'
+```
+
+![](hw9_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
+four-year completion rate and admissions rate are inversely proportional.
+
+
 
 7. Is there a relationship between cost and four-year completion rate? (You don't need to do the stats, just produce a plot). What do you think this means?
+
+```r
+ggplot(data=colleges, mapping = aes(x = costt4_a, y = c150_4_pooled ))+
+  geom_point(na.rm = T)+
+  geom_smooth(method=lm, se=T, na.rm = T)
+```
+
+```
+## `geom_smooth()` using formula = 'y ~ x'
+```
+
+![](hw9_files/figure-html/unnamed-chunk-9-1.png)<!-- -->
+
+four-year completion rate and cost are proportional. 
 
 8. The column titled `INSTNM` is the institution name. We are only interested in the University of California colleges. Make a new data frame that is restricted to UC institutions. You can remove `Hastings College of Law` and `UC San Francisco` as we are only interested in undergraduate institutions.
 
@@ -237,8 +265,108 @@ Remove `Hastings College of Law` and `UC San Francisco` and store the final data
 
 Use `separate()` to separate institution name into two new columns "UNIV" and "CAMPUS".
 
+```r
+univ_calif_final <- colleges%>%
+  filter_all(any_vars(str_detect(.,pattern = "University of California")))%>%
+  filter(!(instnm == "University of California-Hastings College of Law" |
+           instnm == "University of California-San Francisco"))%>%
+  separate(instnm, into = c("univ", "campus"), sep = "-", remove = FALSE)
+```
+
 9. The column `ADM_RATE` is the admissions rate by campus. Which UC has the lowest and highest admissions rates? Produce a numerical summary and an appropriate plot.
 
+```r
+summary <- univ_calif_final%>%
+  filter(adm_rate != "NA")%>%
+  summarize(lowest = min(adm_rate),
+            highest = max(adm_rate));summary
+```
+
+```
+## # A tibble: 1 × 2
+##   lowest highest
+##    <dbl>   <dbl>
+## 1  0.169   0.663
+```
+
+```r
+univ_calif_final%>%
+  filter(adm_rate == summary$lowest) # UC-berkeley
+```
+
+```
+## # A tibble: 1 × 12
+##   instnm        univ  campus city  stabbr zip   adm_rate sat_avg pcip26 costt4_a
+##   <chr>         <chr> <chr>  <chr> <chr>  <chr>    <dbl>   <dbl>  <dbl>    <dbl>
+## 1 University o… Univ… Berke… Berk… CA     94720    0.169    1422  0.105    34924
+## # ℹ 2 more variables: c150_4_pooled <dbl>, pftftug1_ef <dbl>
+```
+
+```r
+univ_calif_final%>%
+  filter(adm_rate == summary$highest) # UC-riverside
+```
+
+```
+## # A tibble: 1 × 12
+##   instnm        univ  campus city  stabbr zip   adm_rate sat_avg pcip26 costt4_a
+##   <chr>         <chr> <chr>  <chr> <chr>  <chr>    <dbl>   <dbl>  <dbl>    <dbl>
+## 1 University o… Univ… River… Rive… CA     92521    0.663    1078  0.149    31494
+## # ℹ 2 more variables: c150_4_pooled <dbl>, pftftug1_ef <dbl>
+```
+
+
+```r
+## ggplot
+univ_calif_final%>%
+  filter(adm_rate != "NA")%>%
+  filter(adm_rate == summary$lowest| adm_rate == summary$highest)%>%
+  ggplot(aes(x = campus, y = adm_rate))+
+  geom_col()+
+  coord_flip()
+```
+
+![](hw9_files/figure-html/unnamed-chunk-12-1.png)<!-- -->
+
+
+
 10. If you wanted to get a degree in biological or biomedical sciences, which campus confers the majority of these degrees? Produce a numerical summary and an appropriate plot.
+
+```r
+bio <- univ_calif_final%>%
+  filter(pcip26!= "NA")%>%
+  select(instnm, campus, pcip26)%>%
+  arrange(desc(pcip26));bio
+```
+
+```
+## # A tibble: 8 × 3
+##   instnm                                 campus        pcip26
+##   <chr>                                  <chr>          <dbl>
+## 1 University of California-San Diego     San Diego      0.216
+## 2 University of California-Davis         Davis          0.198
+## 3 University of California-Santa Cruz    Santa Cruz     0.193
+## 4 University of California-Los Angeles   Los Angeles    0.155
+## 5 University of California-Riverside     Riverside      0.149
+## 6 University of California-Santa Barbara Santa Barbara  0.108
+## 7 University of California-Irvine        Irvine         0.107
+## 8 University of California-Berkeley      Berkeley       0.105
+```
+
+
+
+
+```r
+univ_calif_final%>%
+  filter(pcip26!= "NA")%>%
+  ggplot(aes(x = campus, y = pcip26))+
+  geom_col()+
+  coord_flip()
+```
+
+![](hw9_files/figure-html/unnamed-chunk-14-1.png)<!-- -->
+
+UC San Diego confers the majority of these degrees
+
 
 ## Knit Your Output and Post to [GitHub](https://github.com/FRS417-DataScienceBiologists)
