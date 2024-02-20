@@ -12,5 +12,7 @@ Hi👋, this is Zhuoya Wang.
 MBTI -- ISTJ   
 Dog Lover 🐶
 
+## Homework
 
+my homework is stored in each lab's folder.
 
