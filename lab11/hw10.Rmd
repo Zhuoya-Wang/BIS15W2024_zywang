@@ -127,7 +127,11 @@ deserts%>%
 
 7. [Dipodomys merriami](https://en.wikipedia.org/wiki/Merriam's_kangaroo_rat) is the most frequently sampled animal in the study. How have the number of observations of this species changed over the years included in the study?
 ```{r}
-
+deserts%>%
+  group_by(year)%>%
+  filter(genus == "Dipodomys" & species == "merriami")%>%
+  summarize(number_obs = n())%>%
+  arrange(desc(year))
 ```
 
 8. What is the relationship between `weight` and `hindfoot` length? Consider whether or not over plotting is an issue.
@@ -135,7 +139,6 @@ deserts%>%
 deserts%>%
   ggplot(aes(x= weight, y = hindfoot_length))+
   geom_point(na.rm = T)+
-  geom_smooth(method = lm, se=F)+
   labs(title = "Hindfooe_length vs Weight", x = "weight", y = "hindfoot_length")
 ```
 
@@ -148,23 +151,39 @@ avg_weight <- deserts%>%
   select(c("species", "weight", "hindfoot_length", "sex"))%>%
   na.omit()%>%
   group_by(species)%>%
-  summarize(highest_weight = mean(weight),
-            mean_hindfoot = mean(hindfoot_length))%>%
-  arrange(desc(highest_weight));avg_weight
+  summarize(highest_weight = mean(weight),)%>%
+  top_n(2, highest_weight);avg_weight
   
 
 ```
 
+albigula and spectabilis have, on average, the highest weight
+
+```{r}
+wh_ratio <- deserts%>%
+  filter(!is.na(weight) & !is.na(hindfoot_length))%>%
+  filter(species == "albigula" | species == "spectabilis")%>%
+  group_by(species)%>%
+  mutate(ratio = weight/hindfoot_length)
+```
+
 
 
 ```{r}
-avg_weight%>%
-  mutate(ratio = highest_weight/mean_hindfoot)
+ggplot(wh_ratio, aes(x = species, y = ratio, fill = sex)) +
+  geom_boxplot()+
+  labs(title = "Weight to Hindfoot Length Ratio by Species and Sex",
+       y = "Ratio", x = "Species")
 ```
 
 10. Make one plot of your choice! Make sure to include at least two of the aesthetics options you have learned.
 ```{r}
-
+deserts%>%
+  ggplot(aes(species, fill = sex))+
+  geom_bar()+
+  coord_flip()+
+  labs(title = "Species by sex", y = "Species")+
+  scale_y_log10()
 ```
 
 ## Push your final code to GitHub!
