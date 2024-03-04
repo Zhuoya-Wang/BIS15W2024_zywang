@@ -134,7 +134,7 @@ bbox2 <- make_bbox(long2, lat2, f = 0.03)
 
 8.Load a map from `stamen` in a `terrain-lines` projection and display the map.  
 ```{r}
-map2 <- get_stadiamap(bbox2, maptype = "stamen_terrain", zoom=4)
+map2 <- get_stadiamap(bbox2, maptype = "stamen_terrain_lines", zoom=5)
 ```
 
 9. Build a final map that overlays the recorded observations of wolves in the lower 48 states.  
@@ -150,7 +150,7 @@ ggmap(map2) +
 
 ```{r}
 ggmap(map2) + 
-  geom_point(data = unique_pop, aes(long, lat, color = pop),size=2.5) +
+  geom_point(data = unique_pop, aes(long, lat, color = pop), size=2.5) +
   labs(x= "Longitude", y= "Latitude", title="Distribution of Wolf population in Lower 48 States")
 ```
 
