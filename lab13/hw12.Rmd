@@ -107,15 +107,11 @@ wolves%>%
 ```
 
 
-
 6. How many distinct wolf populations are included in this study? Mae a new object that restricts the data to the wolf populations in the lower 48 US states.  
 ```{r}
 unique_pop <- wolves%>%
   filter(lat>= 24.396308, lat <=49.384358 )%>%
   distinct(pop, .keep_all =T );unique_pop
-
-lower48 <-  wolves%>%
-  filter(lat>= 24.396308, lat <=49.384358 );lower48
 
 ```
 There are6 distinct wolf populations in the lower 48 US states. 
@@ -124,7 +120,7 @@ There are6 distinct wolf populations in the lower 48 US states.
 7. Use the range of the latitude and longitude to build an appropriate bounding box for your map. 
 
 ```{r}
-lower48%>%
+unique_pop%>%
   select(long, lat)%>%
   summary()
 ```
@@ -138,14 +134,14 @@ bbox2 <- make_bbox(long2, lat2, f = 0.03)
 
 8.Load a map from `stamen` in a `terrain-lines` projection and display the map.  
 ```{r}
-map2 <- get_stadiamap(bbox2, maptype = "stamen_toner_lite", zoom=4)
+map2 <- get_stadiamap(bbox2, maptype = "stamen_terrain", zoom=4)
 ```
 
 9. Build a final map that overlays the recorded observations of wolves in the lower 48 states.  
 
 ```{r}
 ggmap(map2) + 
-  geom_point(data = lower48, aes(long, lat), size=2.5) +
+  geom_point(data = unique_pop, aes(long, lat), size=2.5) +
   labs(x= "Longitude", y= "Latitude", title="Distribution of Wolf population in Lower 48 States")
 ```
 
@@ -154,7 +150,7 @@ ggmap(map2) +
 
 ```{r}
 ggmap(map2) + 
-  geom_point(data = lower48, aes(long, lat, color = pop),size=2.5) +
+  geom_point(data = unique_pop, aes(long, lat, color = pop),size=2.5) +
   labs(x= "Longitude", y= "Latitude", title="Distribution of Wolf population in Lower 48 States")
 ```
 
