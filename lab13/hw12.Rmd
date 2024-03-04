@@ -118,11 +118,10 @@ lower48 <-  wolves%>%
   filter(lat>= 24.396308, lat <=49.384358 );lower48
 
 ```
-6 distinct wolf populations in the lower 48 US states. 
+There are6 distinct wolf populations in the lower 48 US states. 
 
 
 7. Use the range of the latitude and longitude to build an appropriate bounding box for your map. 
-
 
 ```{r}
 lower48%>%
@@ -137,9 +136,9 @@ bbox2 <- make_bbox(long2, lat2, f = 0.03)
 ```
 
 
-8.  Load a map from `stamen` in a `terrain-lines` projection and display the map.  
+8.Load a map from `stamen` in a `terrain-lines` projection and display the map.  
 ```{r}
-map2 <- get_stadiamap(bbox2, maptype = "stamen_terrain", zoom=4)
+map2 <- get_stadiamap(bbox2, maptype = "stamen_toner_lite", zoom=4)
 ```
 
 9. Build a final map that overlays the recorded observations of wolves in the lower 48 states.  
@@ -155,7 +154,7 @@ ggmap(map2) +
 
 ```{r}
 ggmap(map2) + 
-  geom_point(data = lower48, aes(long, lat, color=pop),size=2.5) +
+  geom_point(data = lower48, aes(long, lat, color = pop),size=2.5) +
   labs(x= "Longitude", y= "Latitude", title="Distribution of Wolf population in Lower 48 States")
 ```
 
