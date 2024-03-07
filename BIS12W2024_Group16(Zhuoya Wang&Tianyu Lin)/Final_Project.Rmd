@@ -1,0 +1,40 @@
+---
+title: "BIS15L_Final"
+author: "Tianyu Lin & Zhuoya Wang"
+date: "2024-03-07"
+output: 
+  html_document: 
+    keep_md: true
+---
+
+```{r message=FALSE, warning=FALSE}
+library("tidyverse")
+library("janitor")
+library("naniar")
+library("dplyr")
+```
+
+```{r}
+pokemon <- read.csv("~/Desktop/GitHub/BIS15W2024_zywang/BIS12W2024_Group16(Zhuoya Wang&Tianyu Lin)/pokemon.csv")
+```
+
+```{r}
+glimpse(pokemon)
+```
+
+```{r}
+summary(pokemon)
+```
+
+
+It is observed that the variable named'type2' has many blank observations, so we replace them with NA
+
+```{r}
+pokemon <- pokemon %>%
+  mutate_all(~ifelse(. == "", NA, .))
+```
+
+check "NA" again
+```{r}
+pokemon %>% naniar::miss_var_summary()
+```
