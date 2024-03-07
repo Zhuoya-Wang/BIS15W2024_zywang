@@ -473,6 +473,48 @@ clean.</strong></p>
 <div id="shiny-app-code-for-question-2-in-a-script-called-hw13_shinyapp_script" class="section level1">
 <h1>Shiny App code for question 2 in a script called
 Hw13_shinyApp_script</h1>
+<pre class="r"><code>ui &lt;- dashboardPage(
+  dashboardHeader(title = &quot;UC Admissions&quot;),
+  dashboardSidebar( radioButtons(&quot;x&quot;, &quot;Select Campus&quot;, choices = c(&quot;Davis&quot;, &quot;Berkeley&quot;, &quot;Irvine&quot; ,&quot;Los_Angeles&quot;, &quot;Merced&quot;,&quot;Riverside&quot;, &quot;San_Diego&quot;, &quot;Santa_Barbara&quot;, &quot;Santa_Cruz&quot;), selected = &quot;Davis&quot;),
+                    radioButtons( &quot;y&quot;, &quot;Select Status&quot;, choices = c(&quot;Applicants&quot;, &quot;Admits&quot;,&quot;Enrollees&quot;), selected = &quot;Applicants&quot;),
+                    radioButtons(&quot;z&quot;, &quot;Select Year&quot;, choices = unique(UC_admit$academic_yr))
+  ),
+  
+  dashboardBody(
+    plotOutput(&quot;plot&quot;, width = &quot;500px&quot;, height = &quot;400px&quot;)
+    
+  )
+)
+
+server &lt;- function(input, output, session) {
+  
+  output$plot &lt;- renderPlot({
+    UC_admit%&gt;%
+      filter(campus == input$x)%&gt;%
+      filter(category == input$y)%&gt;%
+      filter(academic_yr == input$z)%&gt;%
+      ggplot(aes_string( x=  &quot;ethnicity&quot;, y =  &quot;filtered_count_fr&quot;))+
+      theme(plot.title = element_text(size = 10, angle = 60))+
+      geom_bar(stat = &quot;identity&quot;, fill = &quot;lightskyblue&quot;)+
+      labs(title = &quot;Admissions by Ethnicity &quot;)
+    
+  })
+  output$plot &lt;- renderPlot({
+    UC_admit%&gt;%
+      filter(category == input$y)%&gt;%
+      filter(academic_yr == input$z)%&gt;%
+      ggplot(aes_string( x=  &quot;ethnicity&quot;, y =  &quot;filtered_count_fr&quot;))+
+      theme(plot.title = element_text(size = 10, angle = 60))+
+      geom_bar(stat = &quot;identity&quot;, fill = &quot;lightskyblue&quot;)+
+      labs(title = &quot;Admissions by Ethnicity &quot;) +theme_light()
+    
+  })
+  
+  session$onSessionEnded(stopApp)
+}
+
+shinyApp(ui, server)</code></pre>
+<div style="width: 100% ; height: 400px ; text-align: center; box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;" class="muted well">Shiny applications not supported in static R Markdown documents</div>
 <p><strong>3. Make alternate version of your app above by tracking
 enrollment at a campus over all of the represented years while allowing
 users to interact with campus, category, and ethnicity.</strong></p>
@@ -480,6 +522,38 @@ users to interact with campus, category, and ethnicity.</strong></p>
 <div id="shiny-app-code-for-question-3-also-in-a-script-called-hw13_shinyapp_scrip" class="section level1">
 <h1>Shiny App code for question 3 also in a script called
 Hw13_shinyApp_scrip</h1>
+<pre class="r"><code>ui &lt;- dashboardPage(
+  dashboardHeader(title = &quot;UC Admissions&quot;),
+  dashboardSidebar( radioButtons(&quot;x&quot;, &quot;Select Campus&quot;, choices = c(&quot;Davis&quot;, &quot;Berkeley&quot;, &quot;Irvine&quot; ,&quot;Los_Angeles&quot;, &quot;Merced&quot;,&quot;Riverside&quot;, &quot;San_Diego&quot;, &quot;Santa_Barbara&quot;, &quot;Santa_Cruz&quot;), selected = &quot;Davis&quot;),
+                    radioButtons( &quot;y&quot;, &quot;Select Status&quot;, choices = c(&quot;Applicants&quot;, &quot;Admits&quot;,&quot;Enrollees&quot;), selected = &quot;Applicants&quot;),
+                    radioButtons(&quot;z&quot;, &quot;Select Enthnicity&quot;, choices = unique(UC_admit$ethnicity))
+  ),
+  
+  dashboardBody(
+    plotOutput(&quot;plot&quot;, width = &quot;500px&quot;, height = &quot;400px&quot;)
+    
+  )
+)
+
+server &lt;- function(input, output, session) {
+  
+  output$plot &lt;- renderPlot({
+    UC_admit%&gt;%
+      filter(campus == input$x)%&gt;%
+      filter(category == input$y)%&gt;%
+      filter(ethnicity == input$z)%&gt;%
+      ggplot(aes_string( x=  &quot;academic_yr&quot;, y =  &quot;filtered_count_fr&quot;))+
+      theme(plot.title = element_text(size = 10, angle = 60))+
+      geom_bar(stat = &quot;identity&quot;, fill = &quot;lightskyblue&quot;)+
+      labs(title = &quot;Applicants by year &quot;)
+    
+  })
+  
+  session$onSessionEnded(stopApp)
+}
+
+shinyApp(ui, server)</code></pre>
+<div style="width: 100% ; height: 400px ; text-align: center; box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;" class="muted well">Shiny applications not supported in static R Markdown documents</div>
 <div id="push-your-final-code-to-github" class="section level2">
 <h2>Push your final code to GitHub!</h2>
 <p>Please be sure that you check the <code>keep md</code> file in the
