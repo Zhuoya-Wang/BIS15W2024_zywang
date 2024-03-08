@@ -38,3 +38,52 @@ check "NA" again
 ```{r}
 pokemon %>% naniar::miss_var_summary()
 ```
+
+
+#### Group_by: Generation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Defense Comparison
+```{r}
+pokemon%>%
+  group_by(generation)%>%
+  summarize(avg_defence = mean(defense))
+```
+
+
+### HP Comparison
+```{r}
+pokemon%>%
+  group_by(generation)%>%
+  summarize(avg_hp = mean(hp))
+```
+
+
+### Attack Comparison
+```{r}
+pokemon%>%
+  group_by(generation)%>%
+  summarize(avg_attack = mean(attack))
+```
+
